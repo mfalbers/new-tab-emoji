@@ -1,0 +1,20 @@
+{
+  "name": "new-tab-emoji",
+  "version": "1.0.0",
+  "description": "A Chrome extension that displays a random emoji on a new tab.",
+  "main": "src/background.js",
+  "scripts": {
+    "build": "echo 'No build process defined'",
+    "test": "echo 'No tests defined'"
+  },
+  "keywords": [
+    "chrome",
+    "extension",
+    "emoji",
+    "random"
+  ],
+  "author": "Matt Albers",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {}
+}

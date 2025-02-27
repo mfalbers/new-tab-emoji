@@ -1,0 +1,21 @@
+{
+  "manifest_version": 3,
+  "name": "New Tab Emoji 😀",
+  "version": "1.0",
+  "description": "Displays a random emoji every time a new tab is opened.",
+  "permissions": [
+    "tabs"
+  ],
+  "chrome_url_overrides": {
+    "newtab": "popup/popup.html"
+  },
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": {
+      "128": "images/icon128.jpeg"
+    }
+  },
+  "icons": {
+    "128": "images/icon128.jpeg"
+  }
+}
