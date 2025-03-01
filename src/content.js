@@ -3,8 +3,9 @@ function getRandomEmoji() {
         [0x1F600, 0x1F64F], // Emoticons
         [0x1F300, 0x1F5FF], // Miscellaneous Symbols and Pictographs
         [0x1F680, 0x1F6FF], // Transport and Map Symbols
-        [0x1F700, 0x1F77F], // Alchemical Symbols
-        [0x1F780, 0x1F7FF], // Geometric Shapes Extended
+        // [0x1F700, 0x1F77F], // Alchemical Symbols
+        // [0x1F780, 0x1F7FF], // Geometric Shapes Extended
+        [0x1F7E0, 0x1F7EB], // Subset of Geometric Shapes Extended
         [0x2600, 0x26FF],   // Miscellaneous Symbols
         // [0x1F800, 0x1F8FF], // Supplemental Arrows-C
         [0x1F900, 0x1F9FF], // Supplemental Symbols and Pictographs
@@ -12,7 +13,7 @@ function getRandomEmoji() {
         [0x1FA70, 0x1FAFF], // Symbols and Pictographs Extended-A
         // [0x1F1E6, 0x1F1FF], // Regional Indicator Symbols (Flags)
         [0x1F0A0, 0x1F0FF], // Playing Cards
-        [0x1F030, 0x1F093], // Dominos
+        // [0x1F030, 0x1F093], // Dominos
     ];
 
     const range = emojiRanges[Math.floor(Math.random() * emojiRanges.length)];
@@ -25,11 +26,17 @@ function isEmojiRenderable(emoji) {
     try {
         const canvas = document.createElement('canvas');
         const context = canvas.getContext('2d');
-        context.canvas.width = context.canvas.height = 1;
-        context.fillText(emoji, -4, 4);
-        const getImageDataAplhaChannel = context.getImageData(0, 0, 1, 1).data[3];
-        console.log('emoji: ' + emoji + ' has getImageDataAplhaChannel: ' + getImageDataAplhaChannel);
-        return getImageDataAplhaChannel > 0; // Not a transparent pixel
+        context.font = '16px sans-serif'; // Use a common system font
+        const emojiWidth = context.measureText(emoji).width;
+        const placeholderWidth = context.measureText(' ').width;
+        console.log('emoji: ' + emoji + ', emojiWidth: ' +  emojiWidth + ', placeholderWidth: ' + placeholderWidth);
+        // indicates the stacked black bars which we don't want to render
+        if (emojiWidth === 10.140625) {
+            return false;
+        }
+        // If the width of the emoji is different from the width of the placeholder, it indicates that the emoji can be rendered. 
+        // If the widths are the same, it suggests that the emoji is not supported and is being rendered as a placeholder.
+        return emojiWidth > placeholderWidth;
     } catch (e) {
         return false
     }
