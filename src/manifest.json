@@ -3,9 +3,7 @@
   "name": "New Tab Emoji 🎁",
   "version": "1.0",
   "description": "Displays a random emoji every time a new tab is opened.",
-  "permissions": [
-    "tabs"
-  ],
+  "permissions": [],
   "chrome_url_overrides": {
     "newtab": "popup/popup.html"
   },
